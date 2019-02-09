@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: http://aayush6194.github.io/portfolio/sitemap.xml
+Host: aayush6194.github.io
