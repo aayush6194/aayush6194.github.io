@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: http://www.aayushh.com/sitemap.xml
+Host: www.aayushh.com
