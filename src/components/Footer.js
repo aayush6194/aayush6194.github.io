@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import Links from './Links.js';
 let Footer =()=> {
   return(
-    <div className="grid ">
+    <div className="grid link-grid">
     <Links className="align-left align-center"/>
     <div className="align-left align-end">
     <Link to="/Projects" ><span className="bold-white">Check My Projects!</span>

@@ -4,10 +4,11 @@ module.exports = {
     title: `Aayush Shrestha`,
     description: ``,
     author: `Aayush Shrestha`,
-    siteUrl: 'http://aayush6194.github.io'
+    siteUrl: 'http://www.aayushh.com'
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,'gatsby-plugin-robots-txt',
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-robots-txt`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -27,8 +28,8 @@ module.exports = {
         name: `Aayush Portfolio`,
         short_name: `Portfolio`,
         start_url: `/`,
-        background_color: `#2188F0`,
-        theme_color: `#2188F0`,
+        background_color: `#6CCBFE`,
+        theme_color: `#6CCBFE`,
         display: `standalone`,
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
       }

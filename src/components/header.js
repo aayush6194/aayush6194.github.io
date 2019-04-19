@@ -1,14 +1,14 @@
-import { Link } from "gatsby"
+
 import PropTypes from "prop-types"
 import React from "react"
 import Navbar from './Navbar';
 import Navbtn from './Navbtn';
 
 
-const Header = ({ siteTitle }) => (
+const Header = ({ siteTitle , active}) => (
   <header>
   <div className="header">
-    <Navbar />
+    <Navbar active={active}/>
     <Navbtn />
   </div>
   </header>

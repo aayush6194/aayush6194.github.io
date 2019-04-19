@@ -1,57 +1,77 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components'
+import styled from 'styled-components';
+import posed from 'react-pose';
+import Fade from 'react-reveal/Fade';
+import Typing from 'react-typing-animation';
 
-const li = Array.from(Array(30).keys());
-const animate = keyframes`
-0%{
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-}
-100%{
-    transform: translateY(-1000px) rotate(720deg);
-    opacity: 0;
+const Box = styled(posed.div({}))`
+font-size: 1em;
+font-family: 'Montserrat', sans-serif;
+
+&:before {
+ content: '';
+ width: ${props=> props.width};
+ height: 100%;
+ position: absolute;
+ background: #30ABE8;
+ transition: 0.37s;
+  transition-timing-function: cubic-bezier(2.0, 0.5, 0.1, 0.5);
 }
 `;
 
-const bgColor = ["rgba(48, 171, 232 , 0.2)", "rgba(255 , 255, 255, 0.2)"]
-const Particle = styled.li`
-position: absolute;
-display: block;
-list-style: none;
-width: 1em;
-height: 1em;
-background: ${props=>props.bg};
-animation: ${animate} ${props=>props.time + "s"} linear infinite;
-bottom: 0px;
-top: ${props=>props.top + "%"};
-left: ${props=>props.left + "%"};
-border-radius: 0.1em;
-animation-delay: 0s;
-overflow: hidden !important;` ;
+const Text = styled.div`
+    font-size: 40px;
+    font-weigt: bold;
+`;
 
-const Animation = styled.ul`
-  `;
+// const Text2 = styled.h1`
+//   color:white;
+//   display: flex;
+//    justify-content:center;
+//    align-content:center;
+//    flex-direction:column;
+//
+// `;
 
+class Home extends React.Component  {
+  constructor(props){
+    super(props);
+    this.state = {stage : "end", width: "100%"};
+  }
 
-const Home = (props) => {
-  return (
-  <div className="home grid align-center">
-  <Animation >
-  {li.map((i)=>
-    (<Particle
-      key={i}
-      top={Math.floor(Math.random() * 95)}
-      left={Math.floor(Math.random() * 95)}
-      bg={bgColor[Math.floor(Math.random() * 2)]}
-      time={Math.floor(Math.random() * 24) + 12}>
-    </Particle>))}
-  </Animation>
-        <div className="content-container align-left">
-          Hello, I am <span className="highlight">Aayush!</span> I am a junior at the ULM pursuring a Computer Science degree.
-          I am a web developer, focused on <span className="highlight-blue">MERN</span> stack development. I love building responsive, progressive web applications.<br/><br/>
-          Check out some of my projects, my resume or send me an email.
-        </div>
-  </div>
-  );
+ componentDidMount(){this.setState({stage: "end"});
+
+ setTimeout(()=>this.setState({ width: "0%"}), 50);
+
+}
+  render(){
+    return (<div>
+
+    <div className="home grid align-center" >
+{  /*    <Text2>     <span>I am a</span>
+          <Typing loop={true} >
+
+          <span>Designer</span>
+           <Typing.Backspace count={20} />
+          <span>Web Developer</span>
+           <Typing.Backspace count={20} />
+           </Typing>
+           </Text2> */}
+
+          <div className="content-container align-left" style={{}}>
+          <Fade left>
+          <Box><h1 style={{margin: 0, marginBottom: "9px"}}>Hello, I am Aayush!</h1>
+            I am a junior at the ULM pursuing a Computer Science degree. I am a web developer, focused on <span >MERN</span> stack development.
+            I love building responsive, progressive web apps.<br/> Check out some of my projects, my resume or send me an email.
+            <Text>
+
+            </Text>
+          </Box>
+          </Fade>
+          </div>
+    </div>
+    </div>
+    );
+  }
 }
 export default Home;

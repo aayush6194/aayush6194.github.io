@@ -6,7 +6,7 @@ const Resume = () => (
   <div className="container2 project-grid">
    </div>
 
-</Layout>
+   </Layout>
 
 );
 

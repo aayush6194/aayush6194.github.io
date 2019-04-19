@@ -4,7 +4,8 @@ let Links =()=> {
   return(
   <div className="grid-mobile align-left-on-lg">
     <a href="https://github.com/aayush6194">
-      <button className="bt bt-custom center-sm expand-sm" >GitHub</button>
+      <button className="bt bt-custom center-sm expand-sm" >
+      GitHub</button>
     </a>
 
     <a href="mailto:aayush6194@gmail.com">

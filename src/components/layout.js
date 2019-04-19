@@ -1,8 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
 import "./layout.css"
 
 const Layout = ({ children }) => (
@@ -18,7 +16,6 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-
         <div
           style={{
             margin: `0 auto`,
@@ -27,16 +24,17 @@ const Layout = ({ children }) => (
             paddingTop: 0,
           }}
         >
+          
           <main>{children}</main>
           <footer>
 
           </footer>
+
         </div>
       </>
     )}
   />
 )
-
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
