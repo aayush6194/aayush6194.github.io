@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "portfolio-site",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "",
   "version": "0.1.0",
   "author": "Aayush Shrestha",
   "dependencies": {
@@ -24,10 +24,7 @@
     "react-helmet": "^5.2.0",
     "react-pose": "^4.0.8",
     "react-reveal": "^1.2.2",
-    "react-transition-group": "^2.6.1",
-    "react-typing-animation": "^1.6.2",
-    "styled-components": "^4.4.1",
-    "typed.js": "^2.0.10"
+    "styled-components": "^4.4.1"
   },
   "keywords": [
     "gatsby"
@@ -43,10 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": ""
   },
   "devDependencies": {
     "gh-pages": "^2.0.1"
