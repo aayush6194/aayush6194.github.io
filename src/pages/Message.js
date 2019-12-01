@@ -5,6 +5,8 @@ import Header from '../components/Header.js';
 import SEO from "../components/seo";
 import posed from 'react-pose';
 import Sidebar from '../components/sidebar';
+import DarkMode from '../components/dark-mode';
+
 const Box = styled(posed.div({
   start: { scale: 0, opacity: 0.6},
   end: { scale: 1, opacity: 1},
@@ -35,9 +37,19 @@ const Grid = styled.div`
 class Message extends React.Component  {
   constructor(props){
     super(props);
-    this.state ={ name : "", email: "", message: "", file: null, fileNum: 0, stage: "start"};
-
+    this.state ={ name : "", email: "", message: "", file: null, fileNum: 0, stage: "start", darkMode: false};
   }
+  
+  getDarkMode(){
+    let mode = (localStorage.getItem("dark-mode")? localStorage.getItem("dark-mode") : false) === "true"? true: false; 
+    this.setState( { darkMode: mode});
+  }
+
+  toggleDarkMode = (mode)=>{  
+    localStorage.setItem("dark-mode", mode === "dark"? true : false); 
+      this.setState({ darkMode : mode === "dark"? true : false});
+    }
+
   submit(){
     const API = "http://localhost:5000/upload";
     fetch(API, {
@@ -60,38 +72,22 @@ load (){
           this.setState({fileNum : data.num});
        })
       .catch(function(err) {alert("Connecting to API. Sever Maybe Asleep. Try Again.");});
-
 }
 
  componentDidMount(){
+  this.getDarkMode();
    this.load();
   this.setState({stage: "end"});
  }
 
   render(){
-  // return(
-    // <Layout>
-    //   <SEO title="Message" keywords={[`gatsby`, `application`, `react`]} />
-    //   <Header  active={"message"}/>
-    //   <Grid>
-    //     <label htmlFor="name">Name:</label>
-    //     <input onChange={(e)=>{this.setState({name : e.target.value})}} type="text" className="input" id="name" name="name"/>
-    //     <label htmlFor="email">Email: </label>
-    //     <input onChange={(e)=>{this.setState({email : e.target.value})}} type="email" className="input" id="email" name="email"/>
-    //     <label htmlFor="email">Message: </label>
-    //     <input onChange={(e)=>{this.setState({message : e.target.value})}} type="text" className="input" id="text" name="message"/>
-    //     <input onChange={(e)=>{this.setState({file : e.target.files[0]}); console.log(e.target.files[0])}} type="file" className="input row bt" id="file" name="file"/>
-    //     <input onClick={()=>this.submit()} type="submit" className="input bt bt-custom row" id="submit" name="Submit"/>
-    //   </Grid>
-    // </Layout>
-  // );
-
+    const {darkMode} = this.state;
 return(
-  <Layout>
+  <Layout darkMode={darkMode}>
     <SEO title="Message" keywords={[`gatsby`, `application`, `react`]} />
     <div className="container">
-    <Sidebar active={"message"}/>
-    <Header  active={"message"}/>
+    <Sidebar active={"message"} darkMode={darkMode}/>
+    <Header  active={"message"} darkMode={darkMode}/>
     <Box pose={this.state.stage}>
     <form action="https://nodeapi12.herokuapp.com/upload" encType="multipart/form-data" method="POST">
     <Grid>
@@ -103,11 +99,12 @@ return(
       <input type="text" className="input" id="text" name="message"/>
 
       <input type="file" className="input row" id="file" name="file"/>
-      <input type="submit" className="input bt bt-custom row btt" id="submit" name="Submit"/>
+      <input type="submit" className={`input bt bt-custom row btt ${darkMode && "dark-btn"}`} id="submit" name="Submit"/>
     </Grid>
     </form>
     <center>Number of files: {this.state.fileNum}</center>
      </Box>
+     <DarkMode toggleDarkMode={this.toggleDarkMode} darkMode={darkMode} />
     </div>
   </Layout>
 )

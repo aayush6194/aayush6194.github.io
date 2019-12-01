@@ -3,17 +3,33 @@
       {
       "name":"image5",
       "title": "Dreammy 2.0",
-      "description": "A social site with logged features with tokkens, content uploads, private chat, friend suggesstions",
+      "description": "A social site with logged features with tokens, content uploads, private chat, friend suggesstions",
       "link":"https://dreammy.aayushh.com",
-      "align": "left",
-      "code": ["Express","ReactJs", "Redux", "Styled-Components", "Materialize", "MongoDB"]
+      "code": ["Express","ReactJs", "Redux", "Styled-Components", "Materialize", "MongoDB", "Google Cloud"]
+    },{
+      "name":"image7",
+      "title": "Url Shortner",
+      "description": "A service that shortens the any URL and performs redirects to the actual site",
+      "link":"https://github.com/aayush6194/shorten-url",
+      "code": ["Next.js", "NodeJs","Express" , "MongoDB"]
+    },{
+      "name":"image6",
+      "title": "Google Image Extractor",
+      "description": "A webscraping app that extracts google images related to the searched keyword",
+      "link":"https://github.com/aayush6194/google-image-extractor",
+      "code": ["NodeJs", "EJS","Puppeteer"]
+    },{
+      "name":"image8",
+      "title": "Game Searcher",
+      "description": "A frontend angular application that implements game database API to search games. Additionally, enables users to create game wishlist within the app",
+      "link":"https://github.com/aayush6194/game-searcher",
+      "code": ["Angular", "Rxjs", "ngrx", "NodeJs","Express" , "MongoDB"]
     },
     {
       "name":"image4",
       "title": "Calender App",
       "description": "A Calender App: IN PROGRESS",
       "link":"https://calendar.aayushh.com",
-      "align": "right",
       "code": ["NodeJs","ReactJs", "Redux", "Styled-Components", "MongoDB"]
     },
   
@@ -22,7 +38,6 @@
     "title": "To-do List",
     "description": "A to-do list application built on Materialize CSS; uses PHP as the serverside language for logins, signup and adding/deleting to the list with MySQL as the database.",
     "link":"http://todolistphp.gearhostpreview.com",
-    "align": "left",
     "code": ["PHP", "Materialize", "MySQL", "Javascript"]
   },
   {
@@ -30,7 +45,6 @@
     "title": "ParkStash",
     "description": "A full responsive side created using css grid for ParkStash",
     "link": "",
-    "align": "right",
     "code": ["CSS GRID"]
   },
   {
@@ -38,7 +52,8 @@
     "title": "Auction Website",
     "description": "A responsive ReactJs app to stimulate just the front end for an auction website.",
     "link":"",
-    "align": "left",
     "code": ["ReactJs"]
-  }]
+  }
+
+]
 }

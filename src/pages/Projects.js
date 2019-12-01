@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Layout from '../components/layout';
 import Header from '../components/Header.js';
 import ProjectList from '../components/ProjectList';
@@ -12,14 +12,19 @@ const projList = ProjList.proj;
 
 const Projects = ({data}) => {
 const [darkMode, setDarkMode ] = useState(false);
-const toggleDarkMode = (mode)=> setDarkMode(mode === "dark"? true: false);
+const toggleDarkMode = (mode)=> {setDarkMode(mode === "dark"? true: false); 
+                                localStorage.setItem("dark-mode", mode === "dark"? true : false);}
+useEffect(() => {
+  let mode = (localStorage.getItem("dark-mode")? localStorage.getItem("dark-mode") : false) === "true"? true: false; 
+  setDarkMode(mode);
+}, [])
 return (
   <Layout darkMode={darkMode}>
     <SEO title="Projects" keywords={[`gatsby`, `application`, `react`]} />
     <Header active={"project"} darkMode={darkMode}/>
     <Sidebar active={"project"} darkMode={darkMode} />
     <div className="container2">
-      {projList.map((item) => (<ProjectList  darkMode={darkMode} key={Math.random() * 9989 + "ds"} className="row main-grid" fluid={data[item.name].childImageSharp.fluid} data={item} />))}
+      {projList.map((item, i) => (<ProjectList  darkMode={darkMode} key={i} index={i} className="row main-grid" fluid={data[item.name].childImageSharp.fluid} data={item} />))}
     </div>
     <DarkMode toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
   </Layout>
@@ -90,6 +95,57 @@ query {
       }
     }
   }
+
+image6: file(relativePath: {eq: "pj-6.png"}) {
+  childImageSharp {
+    fluid(maxWidth: 1000) {
+      base64
+      tracedSVG
+      aspectRatio
+      src
+      srcSet
+      srcWebp
+      srcSetWebp
+      sizes
+      originalImg
+      originalName
+    }
+  }
+}
+
+image7: file(relativePath: {eq: "pj-7.png"}) {
+  childImageSharp {
+    fluid(maxWidth: 1000) {
+      base64
+      tracedSVG
+      aspectRatio
+      src
+      srcSet
+      srcWebp
+      srcSetWebp
+      sizes
+      originalImg
+      originalName
+    }
+  }
+}
+
+image8: file(relativePath: {eq: "pj-8.png"}) {
+  childImageSharp {
+    fluid(maxWidth: 1000) {
+      base64
+      tracedSVG
+      aspectRatio
+      src
+      srcSet
+      srcWebp
+      srcSetWebp
+      sizes
+      originalImg
+      originalName
+    }
+  }
+}
 }
 `;
 export default Projects;

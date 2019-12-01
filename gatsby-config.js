@@ -35,5 +35,11 @@ module.exports = {
       }
     },
    'gatsby-plugin-offline',
+   {
+    resolve: `gatsby-plugin-styled-components`,
+    options: {
+      // Add any options here
+    },
+  }
   ],
 }

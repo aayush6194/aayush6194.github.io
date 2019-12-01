@@ -11,11 +11,16 @@ class Index extends React.Component {
     this.state = {darkMode: false};
    }
 
-  componentDidMount() {
-    }
+  componentDidMount() { this.getDarkMode()}
+  
+  getDarkMode(){
+    let mode = (localStorage.getItem("dark-mode")? localStorage.getItem("dark-mode") : false) === "true"? true: false; 
+    this.setState( { darkMode: mode});
+  }
 
-  toggleDarkMode = (mode)=>{
-   
+
+  toggleDarkMode = (mode)=>{  
+    localStorage.setItem("dark-mode", mode === "dark"? true : false); 
       this.setState({ darkMode : mode === "dark"? true : false});
     }
 

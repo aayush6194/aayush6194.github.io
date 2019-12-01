@@ -51,26 +51,23 @@ class ProjectList extends React.Component  {
   }
 
 render(){
-  const {darkMode} = this.props;
+  const {darkMode, index, fluid} = this.props;
+  const {description, title, link} = this.props.data;
   return (
   <Fade>
         <Wrapper pose={this.state.stage} className="home grid align-center dense project-container"  background={`${darkMode? "black": "#30ABE8"} `}>
-              <div className={this.props.data.align + " project-element "} >
-                <ImageBox background={`${darkMode? "black": "#30ABE8"} `}><Img fluid={this.props.fluid} style={{background:"transparent"}}/></ImageBox>
+              <div className={index % 2 === 0? "left" : "right" + " project-element "} >
+                <ImageBox background={`${darkMode? "black": "#30ABE8"} `}><Img fluid={fluid} style={{background:"transparent"}}/></ImageBox>
               </div>
-
-                <Description background={`${darkMode? " rgba(0,  0, 0, 0.8)": " rgba(0,  90, 156, 0.8)"}`}>
-                    <h2 className="center-text">{this.props.data.title}</h2>
-                    <i className="material-icons md-icon">description</i> {this.props.data.description}<br/><br/>
+                <Description background={`rgba(0, ${darkMode? "0, 0": "90, 156"}, 0.8)`}>
+                    <h2 className="center-text">{title}</h2>
+                    <i className="material-icons md-icon">description</i> {description}<br/><br/>
                     <i className="material-icons md-icon">code</i>
                      {this.props.data.code.map(i => <Box key={i.toString()} colr={colors[Math.floor(Math.random()* colors.length)]} > {i} </Box>)}
-                    <div><br/><i className="material-icons md-icon">link</i> <Lin href={this.props.data.link}>{this.props.data.link}</Lin></div>
+                    <div><br/><i className="material-icons md-icon">link</i> <Lin href={link}>{link}</Lin></div>
                 </Description>
-
             </Wrapper>
     </Fade>
-  );
-
-}
+  );}
 }
 export default ProjectList;
