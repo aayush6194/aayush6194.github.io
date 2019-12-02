@@ -80,7 +80,6 @@ header{
    align-items: start;
    align-content: start;
    align-items: stretch;
-   line-height: 168%;
  }
 
  .overlay{
@@ -472,7 +471,6 @@ h1{
   }
 
   .container{
-        line-height: 140%;
         font-size: 0.99em;
   }
 }

@@ -7,17 +7,12 @@ import svg from './../images/step2.svg';
 import svgDark from './../images/step2-dark.svg';
 import DarkMode from './dark-mode';
 import {Link} from 'gatsby';
-import { GoogleLogin } from 'react-google-login';
- 
- 
-const responseGoogle = (response) => {
-  console.log(response);
-}
  
 const Box = styled(posed.div({}))`
 font-size: 1.28em;
 font-family: 'Montserrat', sans-serif;
 padding-right: 1em;
+line-height: 168%;
 &:before {
  content: '';
  width: ${props=> props.width};
@@ -27,13 +22,7 @@ padding-right: 1em;
  transition: 0.37s;
   transition-timing-function: cubic-bezier(2.0, 0.5, 0.1, 0.5);
 }`;
-const GoogleBtn = ()=> (<GoogleLogin
-clientId="432904370571-10sna4o5st6k2aee0q3p09bt05qjgbng.apps.googleusercontent.com"
-buttonText="Login"
-onSuccess={responseGoogle}
-onFailure={responseGoogle}
-cookiePolicy={'single_host_origin'}
-/>);
+
 const Text = styled.div`
     font-size: 40px;
     font-weigt: bold;`;
@@ -55,14 +44,13 @@ class Home extends React.Component  {
     return (
       <>
         <div className="home grid align-center" >
- 
           <div style={{ display: "grid", placeItems: "center" }}><Sidebar active={"home"} darkMode={darkMode} />
             <img src={darkMode ? svgDark : svg} className="svg-glow" style={{ height: "60vh", maxHeight: "50vw" }} /></div>
           <div className="content-container align-left" >
             <Fade left>
               <Box>
                 <h1 style={{ margin: 0, marginBottom: "9px" }}>Hello, I am Aayush!</h1>
-                I am a Senior at the ULM pursuing a <b>Computer Science </b> degree, and I am also a FullStack Web Developer at LSBDC. I love learning and building (web apps).<br /><br/> Check out some of my projects, my resume or send me an email.
+                I am a Senior at the ULM pursuing a <b>Computer Science </b> degree, and I am also a FullStack Web Developer at LSBDC. I love learning and building (web apps).<br /><br /> Check out some of my projects, my resume or send me an email.
             <div>
                   <Link to="/Projects" style={{ float: "right" }}><span className="bold-white">Check My Projects!</span>
                     <i className="material-icons shine">details</i></Link>
