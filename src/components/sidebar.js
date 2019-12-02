@@ -4,16 +4,32 @@ import { Link } from 'gatsby';
 import  svg  from '../images/google.png'
 import { GoogleLogin } from 'react-google-login';
  import api from '../api';
-
+ import useWindowSize from 'react-use/lib/useWindowSize'
+ import Confetti from 'react-confetti'
+  
+ let ConfettiEl = () => {
+   const { width, height } = useWindowSize();
+   return (
+    <>
+    { <Confetti width={width} height={height} />}
+   </>
+   )
+ }
 const MyBtn = styled.button`
   background: transparent;
   border: 0;
   color: white;
   font-size: 1.2em;
+  @media(max-width: 860px){
+    font-size: 1em;
+  }
 `;
 
 const MyImg = styled.img`
   width: 3em;
+  @media(max-width: 860px){
+    width: 2.5em;
+  }
 `;
 
 const GoogleBtn = ({res})=> (<GoogleLogin
@@ -50,12 +66,15 @@ const Nav = styled.div`
 const Sidebar = ({active, darkMode}) => { 
   const [user, setUser] = useState(null);
   const [loggedin, setLoggedin] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const responseGoogle = (res) => {
-    console.log(res.profileObj)
     let profile = fit(res.profileObj);
     setUser(profile);
+    setSuccess(true);
     localStorage.setItem('user', JSON.stringify(profile));
-    api.signin(profile);
+    setTimeout(()=>setSuccess(false), 3000);
+   // api.signin(profile);
   }
 
   let fit = (profile)=>{
@@ -63,18 +82,18 @@ const Sidebar = ({active, darkMode}) => {
     return {id, fname, lname, email, photo};
   }
 
+  //(()=>setTimeout(()=>setSuccess(false), 3000), [success]);
   useEffect(()=>{
   try{
     let user1 = window.localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')) : undefined;
     if(user1 === undefined ) return false;
-    api.signin(user1);
+    //api.signin(user1);
     setUser(user1); 
   } catch(e){
     setUser(null);
   }
   }, []);
 
-  //useEffect(()=>{  api.signin() }, [loggedin]);
 return (<div>
     <Nav background={darkMode? "black":"#156CEC"} >
       <NavLink className="nav-item txt-md center-items" to="/"><i className={`material-icons lg-icon ${active === "home"? "active-nav" : ""}`} >home</i><div>Home</div></NavLink>
@@ -89,6 +108,7 @@ return (<div>
         }
       </span>
     </Nav>
+    { success && <ConfettiEl />}
   </div>
   )};
 

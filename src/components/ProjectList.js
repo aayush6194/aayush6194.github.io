@@ -66,7 +66,7 @@ render(){
       
       alert('Feature coming soon!')
       let {email, id} = user;
-      api.like({pid, id, email});
+     // api.like({pid, id, email});
   };
   return (
   <Fade>
