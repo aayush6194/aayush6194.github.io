@@ -4,14 +4,20 @@ import { API } from './routes';
 
 export default {
   //User Route
-  login: function({ email, password }) {
-    return post(API.login, { email, password });
+  visited: function({email}) {
+    return post(API.visited, {email});
   },
-  signup: function({email, password, firstName, lastName, username, isStudent}) {
-    return post(API.signup, {email, password, firstName, lastName, username, isStudent});
+  signin: function({email, fname, lname, id, photo}) {
+    return post(API.signin, {email, fname, lname, id, photo});
   },
   auth: function(){
     return authPost(API.auth,{});
+  },
+  message: function({name, email, subject, message}) {
+    return post(API.message, {name, email, subject, message});
+  },
+  like: function({email, pid, id}) {
+    return post(API.like, {email, pid, id});
   }
 };
 

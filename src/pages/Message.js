@@ -6,6 +6,7 @@ import SEO from "../components/seo";
 import posed from 'react-pose';
 import Sidebar from '../components/sidebar';
 import DarkMode from '../components/dark-mode';
+import api from '../api';
 
 const Box = styled(posed.div({
   start: { scale: 0, opacity: 0.6},
@@ -37,7 +38,7 @@ const Grid = styled.div`
 class Message extends React.Component  {
   constructor(props){
     super(props);
-    this.state ={ name : "", email: "", message: "", file: null, fileNum: 0, stage: "start", darkMode: false};
+    this.state ={ name : "", email: "", message: "", subject:"", file: null, fileNum: 0, stage: "start", darkMode: false};
   }
   
   getDarkMode(){
@@ -51,35 +52,34 @@ class Message extends React.Component  {
     }
 
   submit(){
-    const API = "http://localhost:5000/upload";
-    fetch(API, {
-        method: 'POST',
-        headers: { 'Access-Control-Allow-Origin':'*'},
-        mode: 'cors',
-        body: this.state.file
-      })
-        .then(function(res){return res.json();})
-          .then((data)=>{
+  const {name, email, message, subject} = this.state;
+  const messageObj = {name, email, subject, message};
+   api.message(messageObj).then((res)=>{
+     if(res.success) alert('submitted');
+     else alert('Error')
 
-         })
-        .catch(function(err) {alert(err);});
+     this.setState({ name : "", email: "", message: "", subject:""});
+   }).catch((e)=>alert(e));
     }
-load (){
-  const API = "https://nodeapi12.herokuapp.com/files";
-  fetch(API, {mode: 'cors'})
-      .then(function(res){return res.json();})
-        .then((data)=>{
-          this.setState({fileNum : data.num});
-       })
-      .catch(function(err) {alert("Connecting to API. Sever Maybe Asleep. Try Again.");});
-}
+// load (){
+//   const API = "https://nodeapi12.herokuapp.com/files";
+//   fetch(API, {mode: 'cors'})
+//       .then(function(res){return res.json();})
+//         .then((data)=>{
+//           this.setState({fileNum : data.num});
+//        })
+//       .catch(function(err) {alert("Connecting to API. Sever Maybe Asleep. Try Again.");});
+// }
 
  componentDidMount(){
   this.getDarkMode();
-   this.load();
+ //  this.load();
   this.setState({stage: "end"});
  }
 
+ change= e =>{
+   this.setState({ [e.target.name]: e.target.value});
+ }
   render(){
     const {darkMode} = this.state;
 return(
@@ -89,19 +89,21 @@ return(
     <Sidebar active={"message"} darkMode={darkMode}/>
     <Header  active={"message"} darkMode={darkMode}/>
     <Box pose={this.state.stage}>
-    <form action="https://nodeapi12.herokuapp.com/upload" encType="multipart/form-data" method="POST">
+    <div>
     <Grid>
       <label htmlFor="name">Name:</label>
-      <input type="text" className="input" id="name" name="name"/>
+      <input type="text" className="input" id="name" name="name" onChange={this.change}/>
       <label htmlFor="email">Email: </label>
-      <input type="email" className="input" id="email" name="email"/>
+      <input type="email" className="input" id="email" name="email" onChange={this.change}/>
+      <label htmlFor="subject">Subject: </label>
+      <input type="text" className="input" id="text" name="message" onChange={this.change}/>
       <label htmlFor="email">Message: </label>
-      <input type="text" className="input" id="text" name="message"/>
+      <input type="text" className="input" id="text" name="subject" onChange={this.change}/>
 
-      <input type="file" className="input row" id="file" name="file"/>
-      <input type="submit" className={`input bt bt-custom row btt ${darkMode && "dark-btn"}`} id="submit" name="Submit"/>
+      <input type="file" className="input row" id="file" name="file" onChange={this.change}/>
+      <input type="submit" className={`input bt bt-custom row btt ${darkMode && "dark-btn"}`} id="submit" name="Submit" onClick={()=>this.submit()}/>
     </Grid>
-    </form>
+    </div>
     <center>Number of files: {this.state.fileNum}</center>
      </Box>
      <DarkMode toggleDarkMode={this.toggleDarkMode} darkMode={darkMode} />

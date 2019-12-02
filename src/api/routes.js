@@ -1,11 +1,13 @@
 let URL  = "https://finapp.aayushh.com";
-URL  = "http://localhost:8000";
+URL  = "http://localhost/api";
 
 const API = {
   //User
-  login: URL + "/visit",
-  signup: URL + "/signup",
+  visit: URL + "/visited",
+  signin: URL + "/signin",
   auth: `${URL}/auth`,
+  message: `${URL}/message`,
+  like: `${URL}/like`
  }
 
 export { URL , API };

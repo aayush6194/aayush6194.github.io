@@ -81,7 +81,12 @@ header{
    align-content: start;
    align-items: stretch;
  }
-
+.label{
+  /* border: 1px solid white; */
+  background: #4c8bf5 ;
+  border-radius: .2em;
+  padding: .15em;
+}
  .overlay{
    position: relative;
    grid-column: 1/-1;
