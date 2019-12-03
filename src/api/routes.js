@@ -1,5 +1,5 @@
-let URL  = "https://finapp.aayushh.com";
-URL  = "http://localhost/api";
+let URL  = "https://api.aayushh.com/api";
+//URL  = "http://localhost/api";
 
 const API = {
   //User

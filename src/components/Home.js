@@ -39,6 +39,8 @@ class Home extends React.Component  {
  setTimeout(()=>this.setState({ width: "0%"}), 50);
 
 }
+
+componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
   render(){
     let { darkMode, toggleDarkMode } = this.props;
     return (

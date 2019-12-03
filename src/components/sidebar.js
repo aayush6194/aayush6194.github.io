@@ -4,17 +4,7 @@ import { Link } from 'gatsby';
 import  svg  from '../images/google.png'
 import { GoogleLogin } from 'react-google-login';
  import api from '../api';
- import useWindowSize from 'react-use/lib/useWindowSize'
- import Confetti from 'react-confetti'
-  
- let ConfettiEl = () => {
-   const { width, height } = useWindowSize();
-   return (
-    <>
-    { <Confetti width={width} height={height} />}
-   </>
-   )
- }
+
 const MyBtn = styled.button`
   background: transparent;
   border: 0;
@@ -66,28 +56,25 @@ const Nav = styled.div`
 const Sidebar = ({active, darkMode}) => { 
   const [user, setUser] = useState(null);
   const [loggedin, setLoggedin] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const responseGoogle = (res) => {
     let profile = fit(res.profileObj);
     setUser(profile);
-    setSuccess(true);
     localStorage.setItem('user', JSON.stringify(profile));
-    setTimeout(()=>setSuccess(false), 3000);
-   // api.signin(profile);
+    api.signin(profile).catch((e)=>console.log('Error Connecting to the server!'));
   }
 
   let fit = (profile)=>{
+    console.log(profile)
     let { givenName: fname, familyName : lname, email, imageUrl : photo, googleId : id } = profile;
     return {id, fname, lname, email, photo};
   }
 
-  //(()=>setTimeout(()=>setSuccess(false), 3000), [success]);
   useEffect(()=>{
   try{
-    let user1 = window.localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')) : undefined;
-    if(user1 === undefined ) return false;
-    //api.signin(user1);
+    let user1 = localStorage.getItem('user') && localStorage.getItem('user') != undefined? JSON.parse(localStorage.getItem('user')) : null;
+    if(user1 === null ) return false;
+    api.signin(user1).catch((e)=>console.log('Error Connecting to the server!'));
     setUser(user1); 
   } catch(e){
     setUser(null);
@@ -108,8 +95,9 @@ return (<div>
         }
       </span>
     </Nav>
-    { success && <ConfettiEl />}
+    
   </div>
   )};
+
 
 export default Sidebar;

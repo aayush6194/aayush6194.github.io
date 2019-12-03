@@ -46,6 +46,8 @@ class Message extends React.Component  {
     this.setState( { darkMode: mode});
   }
 
+  componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
+
   toggleDarkMode = (mode)=>{  
     localStorage.setItem("dark-mode", mode === "dark"? true : false); 
       this.setState({ darkMode : mode === "dark"? true : false});

@@ -53,7 +53,7 @@ class ProjectList extends React.Component  {
     super(props);
     this.state = {stage: "end"}
   }
-
+  componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
 render(){
   const {darkMode, index, fluid} = this.props;
   const {description, title, link} = this.props.data;
@@ -66,7 +66,7 @@ render(){
       
       alert('Feature coming soon!')
       let {email, id} = user;
-     // api.like({pid, id, email});
+      api.like({pid, id, email}).catch((e)=>console.log(e));
   };
   return (
   <Fade>
