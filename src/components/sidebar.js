@@ -1,41 +1,16 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState , useEffect, useContext} from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
-import  svg  from '../images/google.png'
-import { GoogleLogin } from 'react-google-login';
- import api from '../api';
-
-const MyBtn = styled.button`
-  background: transparent;
-  border: 0;
-  color: white;
-  font-size: 1.2em;
-  @media(max-width: 860px){
-    font-size: 1em;
-  }
-`;
-
-const MyImg = styled.img`
-  width: 3em;
-  @media(max-width: 860px){
-    width: 2.5em;
-  }
-`;
-
-const GoogleBtn = ({res})=> (<GoogleLogin
-  clientId="432904370571-10sna4o5st6k2aee0q3p09bt05qjgbng.apps.googleusercontent.com"
-  buttonText="Login"
-  render={renderProps => (<MyBtn onClick={renderProps.onClick} disabled={renderProps.disabled}><MyImg  src={svg}/><div className="label">Login</div></MyBtn>)}
-  onSuccess={res}
-  onFailure={res}
-  cookiePolicy={'single_host_origin'}
-  />);
- 
+import { Link }  from 'gatsby';
+import api from '../api';
+import GoogleBtn from './google-btn';
+import { ModalContext } from '../context/modal-context'
+import { Modal }from './';
 const NavLink = Link;
 const Nav = styled.div`
   top: 0em;
   left:0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
   font-size: .8em;
   height: 100vh;
   display: grid;
@@ -55,8 +30,7 @@ const Nav = styled.div`
 
 const Sidebar = ({active, darkMode}) => { 
   const [user, setUser] = useState(null);
-  const [loggedin, setLoggedin] = useState(false);
-
+  const { modal, text, closeModal} = useContext(ModalContext);
   const responseGoogle = (res) => {
     let profile = fit(res.profileObj);
     setUser(profile);
@@ -76,12 +50,15 @@ const Sidebar = ({active, darkMode}) => {
     if(user1 === null ) return false;
     api.signin(user1).catch((e)=>console.log('Error Connecting to the server!'));
     setUser(user1); 
+
   } catch(e){
     setUser(null);
   }
   }, []);
 
+
 return (<div>
+  <Modal modal={modal} close={closeModal} text={text} />
     <Nav background={darkMode? "black":"#156CEC"} >
       <NavLink className="nav-item txt-md center-items" to="/"><i className={`material-icons lg-icon ${active === "home"? "active-nav" : ""}`} >home</i><div>Home</div></NavLink>
       <NavLink className="nav-item txt-md center-items" to="/Projects"> <i className={`material-icons lg-icon ${active === "project"? "active-nav" : ""}`}>work</i><div>Projects</div></NavLink>
@@ -95,9 +72,7 @@ return (<div>
         }
       </span>
     </Nav>
-    
   </div>
   )};
-
 
 export default Sidebar;

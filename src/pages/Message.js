@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Layout from '../components/layout';
-import Header from '../components/Header.js';
-import SEO from "../components/seo";
 import posed from 'react-pose';
-import Sidebar from '../components/sidebar';
-import DarkMode from '../components/dark-mode';
+import {Loader, Sidebar, DarkMode, SEO, Header} from '../components/';
 import api from '../api';
-
+import {  ModalConsumer} from '../context/modal-context'
 const Box = styled(posed.div({
   start: { scale: 0, opacity: 0.6},
   end: { scale: 1, opacity: 1},
@@ -18,10 +15,10 @@ const Box = styled(posed.div({
 
 }))``;
 
-const Grid = styled.div`
+const Grid = styled.form`
   display: grid;
   grid-template-columns: 60px auto;
-  color: black;
+  color: white;
   font-weight: bold;
   width: 60%;
   max-width: 1000px;
@@ -36,9 +33,10 @@ const Grid = styled.div`
 `;
 
 class Message extends React.Component  {
+  
   constructor(props){
     super(props);
-    this.state ={ name : "", email: "", message: "", subject:"", file: null, fileNum: 0, stage: "start", darkMode: false};
+    this.state ={ name : "", email: "", message: "", subject:"", file: null, fileNum: 0, stage: "start", darkMode: false, loading :false};
   }
   
   getDarkMode(){
@@ -53,16 +51,19 @@ class Message extends React.Component  {
       this.setState({ darkMode : mode === "dark"? true : false});
     }
 
-  submit(){
+  submit(displayModal){
   const {name, email, message, subject} = this.state;
   const messageObj = {name, email, subject, message};
+  if(!name || !email || !message) return displayModal("Enter all the fields");
+  this.setState({ loading : true})
    api.message(messageObj).then((res)=>{
-     if(res.success) alert('submitted');
-     else alert('Error')
-
+     if(res.success) displayModal("Sucessfully Submitted your Message");
+     else displayModal("Could not Submit your Message. Please Try again");
      this.setState({ name : "", email: "", message: "", subject:""});
-   }).catch((e)=>alert(e));
+   }).catch((e)=>displayModal("Error. Please Try Again Later"))
+   .finally(()=>this.setState({ loading : false }))
     }
+
 // load (){
 //   const API = "https://nodeapi12.herokuapp.com/files";
 //   fetch(API, {mode: 'cors'})
@@ -84,33 +85,37 @@ class Message extends React.Component  {
  }
   render(){
     const {darkMode} = this.state;
+    const {name, email, message, subject} = this.state;;
 return(
   <Layout darkMode={darkMode}>
+    <ModalConsumer >{
+      ({displayModal})=><>
     <SEO title="Message" keywords={[`gatsby`, `application`, `react`]} />
     <div className="container">
     <Sidebar active={"message"} darkMode={darkMode}/>
     <Header  active={"message"} darkMode={darkMode}/>
     <Box pose={this.state.stage}>
     <div>
-    <Grid>
+      {this.state.loading && <Loader />}
+    <Grid onSubmit={(e)=> {e.preventDefault(); this.submit(displayModal)}}>
       <label htmlFor="name">Name:</label>
-      <input type="text" className="input" id="name" name="name" onChange={this.change}/>
+      <input type="text" className="input" id="name" name="name" onChange={this.change} value={name}/>
       <label htmlFor="email">Email: </label>
-      <input type="email" className="input" id="email" name="email" onChange={this.change}/>
+      <input type="email" className="input" id="email" name="email" onChange={this.change} value={email}/>
       <label htmlFor="subject">Subject: </label>
-      <input type="text" className="input" id="text" name="message" onChange={this.change}/>
-      <label htmlFor="email">Message: </label>
-      <input type="text" className="input" id="text" name="subject" onChange={this.change}/>
-
-      <input type="file" className="input row" id="file" name="file" onChange={this.change}/>
-      <input type="submit" className={`input bt bt-custom row btt ${darkMode && "dark-btn"}`} id="submit" name="Submit" onClick={()=>this.submit()}/>
+      <input type="text" className="input" id="text" name="subject" onChange={this.change} value={subject}/>
+      <label htmlFor="messagel">Message: </label>
+      <input type="text" className="input" id="text" name="message" onChange={this.change} value={message}/>
+      <button className={`input bt bt-custom row btt ${darkMode && "dark-btn"}`}  onClick={()=>this.submit(displayModal)}>Submit</button>
     </Grid>
     </div>
     <center>Number of files: {this.state.fileNum}</center>
      </Box>
      <DarkMode toggleDarkMode={this.toggleDarkMode} darkMode={darkMode} />
-    </div>
+    </div></>}
+    </ModalConsumer>
   </Layout>
+
 )
 }
 }

@@ -1,5 +1,5 @@
 
-import { authGet, post, authPost, authPut } from './request';
+import {  post, authPost} from './request';
 import { API } from './routes';
 
 export default {

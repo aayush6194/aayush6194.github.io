@@ -1,38 +1,16 @@
 import React from 'react';
+import mySvg from '../images/loader.svg'
 import styled from 'styled-components';
 
-const Spinner = styled.div`
+const Loader = styled.div`
   position: absolute;
   left: calc(50% - 40px);
   top: calc(50% - 40px);
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  padding: 40px;
-  border: 4px;
-  border-style: solid solid hidden hidden;
-  border-radius: 50%;
-  animation: rot 2s linear infinite;
+  display: inline-block;`;
 
-  @keyframes rot {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-    }
-  }
-`;
+const Loader1 = ()=> (
+  <Loader className="blue-txt">
+    <img width="70" src={mySvg} alt="A Loader" />
+  </Loader>);
 
-const LoaderText = styled.div`
-  position: absolute;
-  left: calc(50%);
-  top: calc(50% + 15px);
-`;
-const Loader = ()=> (
-  <div>
-    <Spinner></Spinner>
-    <LoaderText>Loading...</LoaderText>
-  </div>);
-
-export default Loader;
+export default Loader1;

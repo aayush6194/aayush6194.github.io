@@ -18,8 +18,8 @@ text-align: center;
 }`;
 
 const DarkMode = ({toggleDarkMode, darkMode})=>(
-  <FloatBtn background={`${darkMode ? "black" : "#30ABE8"}`}>
-    <div onClick={() => { toggleDarkMode("dark") }} style={{padding: ".5em 1em"}}>
+  <FloatBtn background={`${darkMode ? "black" : "#30ABE8"}`} >
+    <div onClick={() => { toggleDarkMode("dark") }} style={{padding: ".5em 1em"}}  >
       <i className={`fas fa-moon white-txt ${darkMode && "active-nav"}`} ></i>
     </div>
     <div style={{ borderLeft: "2px solid white",padding: ".5em 1em"}} onClick={() => toggleDarkMode("notDark")}>

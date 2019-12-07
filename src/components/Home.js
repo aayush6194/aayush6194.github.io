@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'gatsby';
 import posed from 'react-pose';
 import Fade from 'react-reveal/Fade';
-import Sidebar from './sidebar';
+import { Sidebar, DarkMode, Modal }from './';
 import svg from './../images/step2.svg';
 import svgDark from './../images/step2-dark.svg';
-import DarkMode from './dark-mode';
-import {Link} from 'gatsby';
- 
+import { ModalConsumer, ModalContext } from '../context/modal-context';
+
 const Box = styled(posed.div({}))`
 font-size: 1.28em;
 font-family: 'Montserrat', sans-serif;
@@ -29,6 +29,7 @@ const Text = styled.div`
 
   
 class Home extends React.Component  {
+  static Modal = ModalContext;
   constructor(props){
     super(props);
     this.state = {stage : "end", width: "100%"};
@@ -39,13 +40,12 @@ class Home extends React.Component  {
  setTimeout(()=>this.setState({ width: "0%"}), 50);
 
 }
-
-componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
+componentDidCatch(error, errorInfo){ console.log(error); console.log(errorInfo)}
   render(){
     let { darkMode, toggleDarkMode } = this.props;
     return (
-      <>
         <div className="home grid align-center" >
+          {/* <Modal close={()=>alert()} text={"Error Submiting the form"} /> */}
           <div style={{ display: "grid", placeItems: "center" }}><Sidebar active={"home"} darkMode={darkMode} />
             <img src={darkMode ? svgDark : svg} className="svg-glow" style={{ height: "60vh", maxHeight: "50vw" }} /></div>
           <div className="content-container align-left" >
@@ -62,7 +62,7 @@ componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
             </Fade>
           </div>
           <DarkMode toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
-        </div></>
+        </div>
     );
   }
 }
