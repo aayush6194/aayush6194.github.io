@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 import posed from 'react-pose';
 import {Loader, Sidebar, DarkMode, SEO, Header} from '../components/';
 import api from '../api';
-import {  ModalConsumer} from '../context/modal-context'
+import {  ModalConsumer} from '../context/modal-context';
 const Box = styled(posed.div({
   start: { scale: 0, opacity: 0.6},
   end: { scale: 1, opacity: 1},
@@ -109,7 +109,6 @@ return(
       <button className={`input bt bt-custom row btt ${darkMode && "dark-btn"}`}  onClick={()=>this.submit(displayModal)}>Submit</button>
     </Grid>
     </div>
-    <center>Number of files: {this.state.fileNum}</center>
      </Box>
      <DarkMode toggleDarkMode={this.toggleDarkMode} darkMode={darkMode} />
     </div></>}

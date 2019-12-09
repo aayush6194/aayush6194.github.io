@@ -13,7 +13,7 @@ width: 100%;
 height: 100%;
 background-color: rgb(0,0,0);
 background-color: rgba(0,0,0,0.4);
-animation : ${opacityAnimation} 1s ease-in-out;`;
+animation : ${opacityAnimation} 0.5s ease-out;`;
 
 const Modall = styled.div`
 background: white;
@@ -85,23 +85,4 @@ const Modal = ({modal, text, close })=>(
             </Modall></Zoom>
         </Wrapper>: null}</>);
 
-const InfoModal = ({ text, close, img }) =>
-  (
-    <Wrapper>
-      <Modall>
-        <Header>
-          <Btn style={{ float: "right" }} className="bt right-corner" onClick={close}> &nbsp;X&nbsp; </Btn>
-        </Header>
-        <div >
-          <div style={{ minHeight: "5em", padding: "2em" }} className="blue-txt bold txt-md">
-            <img src={img} className="img-lg" alt=""/>
-            <h5>{text}</h5>
-          </div>
-          <div>
-            <button className="btn hoverr full" onClick={close}>Okay, Got it!</button>
-          </div>
-
-        </div>
-      </Modall>
-    </Wrapper>);
-export { Modal, InfoModal };
+export { Modal };

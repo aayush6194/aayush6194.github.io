@@ -1,9 +1,9 @@
 import React, { useState , useEffect, useContext} from 'react';
 import styled from 'styled-components';
 import { Link }  from 'gatsby';
-import api from '../api';
 import GoogleBtn from './google-btn';
-import { ModalContext } from '../context/modal-context'
+import { ModalContext } from '../context/modal-context';
+import { UserContext } from '../context/user-context';
 import { Modal }from './';
 const NavLink = Link;
 const Nav = styled.div`
@@ -29,13 +29,11 @@ const Nav = styled.div`
 }`;
 
 const Sidebar = ({active, darkMode}) => { 
-  const [user, setUser] = useState(null);
   const { modal, text, closeModal} = useContext(ModalContext);
+  const { user, setUser } = useContext(UserContext);
   const responseGoogle = (res) => {
     let profile = fit(res.profileObj);
     setUser(profile);
-    localStorage.setItem('user', JSON.stringify(profile));
-    api.signin(profile).catch((e)=>console.log('Error Connecting to the server!'));
   }
 
   let fit = (profile)=>{
@@ -43,19 +41,6 @@ const Sidebar = ({active, darkMode}) => {
     let { givenName: fname, familyName : lname, email, imageUrl : photo, googleId : id } = profile;
     return {id, fname, lname, email, photo};
   }
-
-  useEffect(()=>{
-  try{
-    let user1 = localStorage.getItem('user') && localStorage.getItem('user') != undefined? JSON.parse(localStorage.getItem('user')) : null;
-    if(user1 === null ) return false;
-    api.signin(user1).catch((e)=>console.log('Error Connecting to the server!'));
-    setUser(user1); 
-
-  } catch(e){
-    setUser(null);
-  }
-  }, []);
-
 
 return (<div>
   <Modal modal={modal} close={closeModal} text={text} />

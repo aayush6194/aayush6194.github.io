@@ -3,7 +3,8 @@ import "./layout.css"
 import styled from 'styled-components';
 import svg from './b.svg';
 import darkSvg from './b-dark.svg';
-import { ModalConsumer, ModalProvider } from '../context/modal-context';
+import { ModalProvider } from '../context/modal-context';
+import { UserProvider } from '../context/user-context'
 
 const MyWrapper = styled.div`
 background-attachment: fixed;
@@ -15,6 +16,7 @@ background-image: url(${props => props.background});
 background-size: cover;`;
 
 const Layout = ({ children,darkMode }) => (
+  <UserProvider>
   <ModalProvider>
         <MyWrapper
          background = {darkMode? darkSvg : svg}
@@ -22,6 +24,7 @@ const Layout = ({ children,darkMode }) => (
           <main>{children}</main>
         </MyWrapper>
     </ModalProvider>
+  </UserProvider>
     );
 
 export default Layout;

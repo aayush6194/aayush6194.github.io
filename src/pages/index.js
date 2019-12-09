@@ -10,7 +10,7 @@ class Index extends React.Component {
     super(props);
     this.state = {darkMode: false};
    }
-
+   componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
   componentDidMount() { this.getDarkMode()}
   
   getDarkMode(){

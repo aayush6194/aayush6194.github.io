@@ -1,5 +1,5 @@
 
-import {  post, authPost} from './request';
+import {  post, authPost, getParam} from './request';
 import { API } from './routes';
 
 export default {
@@ -16,8 +16,11 @@ export default {
   message: function({name, email, subject, message}) {
     return post(API.message, {name, email, subject, message});
   },
-  like: function({email, pid, id}) {
-    return post(API.like, {email, pid, id});
+  like: function({pid, user}) {
+    return post(API.like, {user, pid});
+  },
+  getLikes: function(pid) {
+    return getParam(API.getLikes, pid);
   }
 };
 

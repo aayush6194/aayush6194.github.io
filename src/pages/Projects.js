@@ -1,12 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Layout from '../components/layout';
-import Header from '../components/Header.js';
 import ProjectList from '../components/ProjectList';
 import { graphql } from "gatsby"
-import SEO from "../components/seo";
-import Sidebar from './../components/sidebar';
 import ProjList from '../json/projList.json';
-import DarkMode from '../components/dark-mode';
+import{ DarkMode, SEO, Sidebar, Header} from '../components';
 
 const projList = ProjList.proj;
 

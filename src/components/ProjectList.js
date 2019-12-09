@@ -1,10 +1,11 @@
 import React from 'react';
 import Img from "gatsby-image";
 import styled from 'styled-components';
-import posed from 'react-pose';
 import Fade from 'react-reveal/Zoom';
 import svg from '../images/step.svg';
 import api from '../api';
+import {  ModalConsumer } from '../context/modal-context';
+import {  UserConsumer } from '../context/user-context';
 const Lin = styled.a``;
 const colors = ["#18A7EE", "#18EE42", "#EED018", "#F35F90", "#D45FF3","#0288D1","#FFEB3B", "#795548", "#FF5722", "#303F9F", "#303F9F", "#303F9F"];
 
@@ -21,15 +22,7 @@ const ImageBox = styled.div`
   background: ${ props => props.background};
   height: 100%;`;
 
-const Wrapper = styled(posed.div({
-  start: {scale: 0},
-  end: {scale: 1},
-  transition:{
-    duration: 210,
-    ease: 'linear'
-  }
-}
-))`
+const Wrapper = styled.div`
 background: #30ABE8;
 background: ${props => props.background}
 `;
@@ -47,26 +40,54 @@ const Description = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
   `;
+const Message = styled.span`
+ padding: .3em;
+ color: #005A9C;
+ margin-left: 1em;
+ border-radius: 1em;
+ border: 2px solid #005A9C;
+ background: white;
+`;
 
 class ProjectList extends React.Component  {
   constructor(props){
     super(props);
-    this.state = {stage: "end"}
+    this.state = { likes: [], hasLiked: false, showSuccess: false, loading: true}
   }
+
   componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
+  componentDidMount(){
+    api.getLikes(this.props.data.pid).then(res=>{
+      if(res.success) {
+       console.log( typeof res.likes)
+        if(typeof res.likes !== undefined ){
+          this.setState({ likes :  res.likes})
+          let { user } = this.props.userContext;
+          if(user && user !== undefined ) { 
+          let { email : userEmail , id} = user;
+          res.likes.forEach(({email})=>{
+            if(userEmail === email) this.setState({ hasLiked : true});
+          })
+        } else this.setState({ likes : [] })
+        this.setState({loading : false})
+      }
+    }
+    }).catch(e=>console.log(e))
+    .finally(()=>this.setState({loading : false}))
+  }
 render(){
   const {darkMode, index, fluid} = this.props;
-  const {description, title, link} = this.props.data;
-
+  const {description, title, link, pid} = this.props.data;
+ const { likes, hasLiked, showSuccess, loading } = this.state;
   const like = (pid)=>{
-      let user = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')): undefined;
-      if(user === undefined ) {
-      alert('Login First'); 
-      return false;}
-      
-      alert('Feature coming soon!')
-      let {email, id} = user;
-      api.like({pid, id, email}).catch((e)=>console.log(e));
+      let { user } = this.props.userContext;
+      if(user === undefined )  this.props.modalContext.displayModal('To Like Projects Please Login First.') 
+      else{
+      api.like({pid, user}).then((res)=>{
+        if(res.success) this.setState({ hasLiked : true, likes : [...this.state.likes, user] , showSuccess: true});
+        setTimeout(()=>this.setState({ showSuccess : false}), 3000);
+      }).catch((e)=>console.log(e));
+    }
   };
   return (
   <Fade>
@@ -82,12 +103,33 @@ render(){
                      {this.props.data.code.map(i => <Box key={i.toString()} colr={colors[Math.floor(Math.random()* colors.length)]} > {i} </Box>)}
                     <div><br/><i className="material-icons md-icon">link</i> <Lin href={link}>{link}</Lin></div>
                     </div>
-                    <span onClick={()=>like(index)}>
-                      <i className="fa fa-heart md-icon" aria-hidden="true"></i>
+                    <span onClick={()=>like(pid)} style={{padding: "1em .3em"}} >
+                      <div className="tooltip-container">
+                        <i className={`fa fa-heart md-icon hover-red ${hasLiked && 'red'}`} aria-hidden="true"></i> 
+                        {likes? ` ${likes.length} ${likes.length === 1? 'person' : 'people' } liked this` : ' Be the first one to like this.'}
+                        {showSuccess && <Message className="opacity-animation">Liked!</Message>}
+                        <div className="tooltip">
+                          {loading && likes.length > 0? "Loading": likes.map(({fname, lname, id})=><div key={id}>{`${fname} ${lname}`}</div>)}
+                        </div>
+                      </div>
                     </span>
                 </Description>
             </Wrapper>
     </Fade>
   );}
 }
-export default ProjectList;
+
+
+
+let Props = (props) => (
+  <ModalConsumer>
+    {(modalContext) =>
+      <UserConsumer>
+        {(userContext) => <ProjectList {...{ modalContext }} {...{ userContext }}  {...props} />}
+      </UserConsumer>
+    }
+  </ModalConsumer>
+);
+
+export default Props;
+

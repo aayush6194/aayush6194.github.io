@@ -89,6 +89,16 @@ header{
    overflow: hidden;
  }
 
+ .opacity-animation{
+  animation: opacity .5s ease-out;
+ }
+
+ @keyframes opacity{
+   0% { opacity: 0; }
+   100% { opacity: 1;}
+ }
+
+
 .row{
    grid-column: 1/-1;
 }
@@ -225,6 +235,31 @@ header{
   font-size: 1.2em;
 }
 
+.tooltip {
+  display: none;
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: .3em 1em;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.tooltip-container{
+  cursor: pointer;
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  display: block;
+}
 
 .svg-spin:hover{
   animation: flip 3s linear infinite;
@@ -232,6 +267,10 @@ header{
 
  .svg-glow{
   animation: glow 2s linear infinite;
+  -webkit-animation: glow 2s linear infinite; /* Safari & Chrome */
+  -moz-animation: glow 2s linear infinite; /* Firefox */
+  -ms-animation: glow 2s linear infinite; /* Internet Explorer */
+  -o-animation: glow 2s linear infinite; /* Opera */
  }
 
  @keyframes glow {
@@ -338,6 +377,12 @@ li > a,  Link, a{
   width: 6em;
 }
 
+.hover-red:hover{
+  color: red;
+}
+.red{
+  color: red;
+}
 .bold-white {
   font-size: 1.25em;
   font-weight: bold;

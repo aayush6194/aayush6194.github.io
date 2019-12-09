@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-
 const li = Array.from(Array(20).keys());
 const Animation = styled.span`display: block;`;
 const Box = styled.div`display: grid; grid-template-columns: 1fr 1fr;`;
