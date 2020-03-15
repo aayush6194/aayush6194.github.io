@@ -1,5 +1,13 @@
 {
   "proj" : [
+    {
+      "pid" : "8",
+      "name":"image11",
+      "title": "Platypus Schedular",
+      "description": "A Football Match Scheduling Web Application. Complete with Real time game request notification with sockets, Profile Image upload, Search feature, Instant Messaging, Darkmode and Email Verification ",
+      "link":"https://capstone.aayushh.com",
+      "code": ["Typescript","ReactJs", "Redux", "Nodejs", "Styled-Components", "MySQL", "AWS", "EC2", "RDS", "SES", "Nginx"]
+    },
       {
       "pid" : "0",
       "name":"image5",

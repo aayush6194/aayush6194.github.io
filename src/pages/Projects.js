@@ -149,6 +149,23 @@ image8: file(relativePath: {eq: "pj-8.png"}) {
   }
 }
 
+image11: file(relativePath: {eq: "pj-11.png"}) {
+  childImageSharp {
+    fluid(maxWidth: 1000) {
+      base64
+      tracedSVG
+      aspectRatio
+      src
+      srcSet
+      srcWebp
+      srcSetWebp
+      sizes
+      originalImg
+      originalName
+    }
+  }
+}
+
 image9: file(relativePath: {eq: "pj-9.png"}) {
   childImageSharp {
     fluid(maxWidth: 1000) {
