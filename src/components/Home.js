@@ -7,12 +7,13 @@ import { Sidebar, DarkMode, Modal }from './';
 import svg from './../images/step2.svg';
 import svgDark from './../images/step2-dark.svg';
 import { ModalConsumer, ModalContext } from '../context/modal-context';
+import Hints from './hints';
 
 const Box = styled(posed.div({}))`
-font-size: 1.28em;
+font-size: 1.18em;
 font-family: 'Montserrat', sans-serif;
 padding-right: 1em;
-line-height: 168%;
+line-height: 165%;
 &:before {
  content: '';
  width: ${props=> props.width};
@@ -52,7 +53,7 @@ componentDidCatch(error, errorInfo){ console.log(error); console.log(errorInfo)}
             <Fade left>
               <Box>
                 <h1 style={{ margin: 0, marginBottom: "9px" }}>Hello, I am Aayush!</h1>
-                I am a Senior at the ULM pursuing a <b>Computer Science </b> degree, and I am also a FullStack Web Developer at LSBDC. I love learning and building (web apps).<br /><br /> Check out some of my projects, my resume or send me an email.
+                I am a Senior at the ULM pursuing a <b>Computer Science </b> degree, and I am also a <b>FullStack Web Developer</b> at LSBDC. I love learning and I build web apps.<br /><br /> Check out some of my projects, my resume or send me an email.
             <div>
                   <Link to="/Projects" style={{ float: "right" }}><span className="bold-white">Check My Projects!</span>
                     <i className="material-icons shine">details</i></Link>
@@ -61,6 +62,7 @@ componentDidCatch(error, errorInfo){ console.log(error); console.log(errorInfo)}
               </Box>
             </Fade>
           </div>
+          <Hints msg={["Hello"]} />
           <DarkMode toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
         </div>
     );

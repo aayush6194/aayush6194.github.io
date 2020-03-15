@@ -11,17 +11,22 @@ const Projects = ({data}) => {
 const [darkMode, setDarkMode ] = useState(false);
 const toggleDarkMode = (mode)=> {setDarkMode(mode === "dark"? true: false); 
                                 localStorage.setItem("dark-mode", mode === "dark"? true : false);}
+const [activeItem, setActiveItem ] = useState(-1); 
 useEffect(() => {
   let mode = (localStorage.getItem("dark-mode")? localStorage.getItem("dark-mode") : false) === "true"? true: false; 
   setDarkMode(mode);
+  const [, query] = window.location.href.split('?');
+  const [, id ] = query? query.split('=') : [-1 , -1];
+  setActiveItem(id);
+
 }, [])
 return (
   <Layout darkMode={darkMode}>
     <SEO title="Projects" keywords={[`gatsby`, `application`, `react`]} />
     <Header active={"project"} darkMode={darkMode}/>
     <Sidebar active={"project"} darkMode={darkMode} />
-    <div className="container2">
-      {projList.map((item, i) => (<ProjectList  darkMode={darkMode} key={i} index={i} className="row main-grid" fluid={data[item.name].childImageSharp.fluid} data={item} />))}
+    <div className="container2" >
+      {projList.map((item, i) => (<ProjectList  darkMode={darkMode} active={i == activeItem} key={i} index={i} fluid={data[item.name].childImageSharp.fluid} data={item} />))}
     </div>
     <DarkMode toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
   </Layout>
@@ -143,6 +148,24 @@ image8: file(relativePath: {eq: "pj-8.png"}) {
     }
   }
 }
+
+image9: file(relativePath: {eq: "pj-9.png"}) {
+  childImageSharp {
+    fluid(maxWidth: 1000) {
+      base64
+      tracedSVG
+      aspectRatio
+      src
+      srcSet
+      srcWebp
+      srcSetWebp
+      sizes
+      originalImg
+      originalName
+    }
+  }
+}
+
 }
 `;
 export default Projects;

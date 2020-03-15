@@ -1,5 +1,5 @@
 let URL  = "https://api.aayushh.com/api";
-URL  = "http://localhost:8080/api";
+//URL  = "http://localhost:8080/api";
 
 const API = {
   //User

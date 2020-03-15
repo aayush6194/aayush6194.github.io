@@ -8,9 +8,10 @@ import SEO from "../components/seo";
 class Index extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {darkMode: false};
+    this.state = {darkMode: false, firstVisit : true, loader: true };
    }
-   componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
+  
+  componentDidCatch(error, errorInfo){ console(error); console(errorInfo)}
   componentDidMount() { this.getDarkMode()}
   
   getDarkMode(){

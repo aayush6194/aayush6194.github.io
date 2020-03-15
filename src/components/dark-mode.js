@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const FloatBtn = styled.div`
 position: fixed;
-bottom: 1em;
+bottom: 6em;
 right: 10px;
 display: grid;
 grid-template-columns: auto auto;

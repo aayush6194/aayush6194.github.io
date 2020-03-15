@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Aayush Shrestha",
   "dependencies": {
+    "antd": "^4.0.2",
     "babel-plugin-styled-components": "^1.10.6",
     "gatsby": "^2.0.107",
     "gatsby-image": "^2.0.29",
@@ -19,6 +20,7 @@
     "gatsby-transformer-sharp": "^2.1.13",
     "prop-types": "^15.6.2",
     "react": "^16.12.0",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.12.0",
     "react-google-login": "^5.0.7",
     "react-helmet": "^5.2.0",

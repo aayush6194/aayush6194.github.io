@@ -9,9 +9,16 @@
       "code": ["Express","ReactJs", "Redux", "Styled-Components", "Materialize", "MongoDB", "Google Cloud"]
     },{
       "pid" : "1",
+      "name":"image9",
+      "title": "Finapp : In Progress",
+      "description": "Financial Literacy Application for highschool students in NorthEast Lousiana",
+      "link":"https://uwnelafinapp.com",
+      "code": ["Typescript","ReactJs", "NodeJs","Express" , "MongoDB", "Google Cloud"]
+    },{
+      "pid" : "1",
       "name":"image7",
       "title": "Url Shortner",
-      "description": "A service that shortens the any URL and performs redirects to the actual site",
+      "description": "A service that shortens any URL and performs redirects to the actual site",
       "link":"https://github.com/aayush6194/shorten-url",
       "code": ["Next.js", "NodeJs","Express" , "MongoDB"]
     },{
@@ -45,14 +52,6 @@
     "description": "A to-do list application built on Materialize CSS; uses PHP as the serverside language for logins, signup and adding/deleting to the list with MySQL as the database.",
     "link":"http://todolistphp.gearhostpreview.com",
     "code": ["PHP", "Materialize", "MySQL", "Javascript"]
-  },
-  {
-    "pid" : "6",
-    "name":"image2",
-    "title": "ParkStash",
-    "description": "A full responsive side created using css grid for ParkStash",
-    "link": "",
-    "code": ["CSS GRID"]
   },
   {
     "pid" : "7",
