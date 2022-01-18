@@ -6,6 +6,7 @@ import svg from '../images/step.svg';
 import api from '../api';
 import {  ModalConsumer } from '../context/modal-context';
 import {  UserConsumer } from '../context/user-context';
+import { primaryColor } from '../config';
 const Lin = styled.a``;
 const colors = ["#18A7EE", "#18EE42", "#EED018", "#F35F90", "#D45FF3","#0288D1","#FFEB3B", "#795548", "#FF5722", "#303F9F", "#303F9F", "#303F9F"];
 
@@ -65,9 +66,9 @@ render(){
   <Fade>
         <Wrapper ref={this.scrollRef} pose={this.state.stage} className={`home grid align-center dense project-container ${this.props.active && 'svg-glow'}`}  background={`${darkMode? "black": "#30ABE8"} `}>
               <div className={index % 2 === 0? "left" : "right" + " project-element "} >
-                <ImageBox background={`${darkMode? "black": "#30ABE8"} `}><Img fluid={fluid} style={{background:"transparent"}}/></ImageBox>
+                <ImageBox background={`${darkMode? "black": primaryColor} `}><Img fluid={fluid} style={{background:"transparent"}}/></ImageBox>
               </div>
-                <Description background={`rgba(0, ${darkMode? "0, 0": "90, 156"}, 0.8)`}>
+                <Description background={`rgba( ${darkMode? "0, 0, 0": "44,162,172"}, 0.8)`}>
                   <div>
                     <h2 className="center-text">{title}</h2>
                     <i className="material-icons md-icon">description</i> {description}<br/><br/>
