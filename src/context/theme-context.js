@@ -1,24 +1,26 @@
 import React, { createContext } from 'react';
+import { safeGetLocalStorage, safeSetLocalStorage } from '../utils/localstorage';
+
 export const ThemeContext = createContext({
-  darkMode: false,
+  darkMode: true,
   toggleTheme: () => {   },
 });
 
 export class ThemeProvider extends React.Component {
 
     toggleTheme = () => {
-    localStorage.setItem("dark-mode", !this.state.darkMode); 
+    safeSetLocalStorage("dark-mode", !this.state.darkMode); 
     this.setState({ darkMode : !this.state.darkMode });
   };
 
 
   state = {
-  darkMode: false,
+  darkMode: true,
   toggleTheme: this.toggleTheme
   };
 
   componentWillMount(){
-    let mode = (localStorage.getItem("dark-mode")? localStorage.getItem("dark-mode") : false) === "true"? true: false; 
+    let mode = safeGetLocalStorage("dark-mode") !== true; 
     this.setState( { darkMode: mode });
   }
 

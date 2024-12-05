@@ -5,18 +5,22 @@
   "version": "0.1.0",
   "author": "Aayush Shrestha",
   "dependencies": {
+    "@mdx-js/mdx": "^1.5.1",
+    "@mdx-js/react": "^1.5.1",
     "antd": "^4.0.2",
     "babel-plugin-styled-components": "^1.10.6",
     "gatsby": "^2.0.107",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-manifest": "^2.0.16",
+    "gatsby-plugin-mdx": "^1.0.0",
     "gatsby-plugin-offline": "^2.0.22",
     "gatsby-plugin-page-transitions": "^1.0.7",
     "gatsby-plugin-react-helmet": "^3.0.5",
     "gatsby-plugin-robots-txt": "^1.4.0",
     "gatsby-plugin-sharp": "^2.0.19",
     "gatsby-plugin-styled-components": "^3.1.14",
-    "gatsby-source-filesystem": "^2.0.19",
+    "gatsby-source-filesystem": "^2.0.38",
+    "gatsby-transformer-remark": "^6.14.0",
     "gatsby-transformer-sharp": "^2.1.13",
     "prop-types": "^15.6.2",
     "react": "^16.12.0",
@@ -26,6 +30,7 @@
     "react-helmet": "^5.2.0",
     "react-pose": "^4.0.8",
     "react-reveal": "^1.2.2",
+    "showdown": "^2.1.0",
     "styled-components": "^4.4.1"
   },
   "keywords": [
@@ -45,6 +50,7 @@
     "url": ""
   },
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "raw-loader": "^4.0.2"
   }
 }

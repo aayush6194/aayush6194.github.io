@@ -9,7 +9,7 @@ let Links =({darkMode})=> {
       &nbsp; GitHub</button>
     </a>
 
-    <a href="mailto:aayush6194@gmail.com">
+    <a href="mailto:hello@aayushh.com">
      <button className={`bt bt-custom lift center-sm expand-sm ${darkMode? "dark-btn" : ""}`} > <i className="fa fa-envelope md-icon" aria-hidden="true"></i> &nbsp; Email</button>
     </a>
 

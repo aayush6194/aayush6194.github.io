@@ -14,9 +14,12 @@ const Welcome = () => {
             <BorderRadiusTop style={{ background: "dodgerblue", height: "100%"}}>
                 <img src={welcome} style={{ height: "100%", maxWidth: "80%", width: "auto" }} />
             </BorderRadiusTop>
-            <div style={{ height: "20%" }}>
+            <div style={{ height: "20%", display: 'grid', placeItems: 'center', gridGap: '.5em'}}>
                 <Header size={"1em"}>Welcome to my portfolio site!</Header>
-                <Header size={".8em"}>Let me show you around</Header>
+                <Header size={".85em"}>Signup for for my news letter.</Header>
+                <input style={{ height: 30, width: 350}} placeholder='john.doe@google.com'/>
+                
+        
             </div>
         </Main>
     )
@@ -72,6 +75,6 @@ place-self: start stretch;
 max-height: 15em;
 width: 100%;`;
 
-const FirstSignup = ({ finishSignup }) => (<MultiStepModal components={[<Welcome />, <ThankYou />]} finishSignup={finishSignup} />)
+const FirstSignup = ({ finishSignup }) => (<MultiStepModal components={[<Welcome />]} finishSignup={finishSignup} />)
 
 export default FirstSignup;

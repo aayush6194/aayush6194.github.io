@@ -8,6 +8,7 @@ import { UserProvider } from '../context/user-context'
 import { Loader2 } from "./Loader";
 import FirstSignup from "./first-time";
 import MultiStepModal from "./multistep";
+import { safeGetLocalStorage, safeSetLocalStorage } from "../utils/localstorage";
 
 const MyWrapper = styled.div`
 background-attachment: fixed;
@@ -18,9 +19,10 @@ background-image: url(${svg});
 background-image: url(${props => props.background});
 background-size: cover;`;
 
+
 const Layout = ({ children,darkMode }) => {
-const ld = localStorage.getItem("loader") === 'false'? false  : true;
-const ft = localStorage.getItem("firstTime") === 'false'? false  : true;
+const ld = safeGetLocalStorage("loader") === 'false'? false  : true;
+const ft = safeGetLocalStorage("firstTime") === 'false'? false  : true;
 
 const [loader, setLoader] = useState(ld);
 const [ firstTime, setFT ] = useState(ft);
@@ -28,12 +30,12 @@ const [ firstTime, setFT ] = useState(ft);
 useEffect(()=> {
 if(loader){
   setTimeout(()=>setLoader(false), 1500);
-  localStorage.setItem('loader', 'false')
+  safeSetLocalStorage('loader', 'false')
 }
 }, []);
 
 const finishSignup = ()=>{
-  localStorage.setItem('firstTime', 'false');
+  safeGetLocalStorage('firstTime', 'false');
   setFT(false);
 }
 

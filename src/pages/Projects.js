@@ -4,6 +4,7 @@ import ProjectList from "../components/ProjectList";
 import { graphql } from "gatsby";
 import ProjList from "../json/projList.json";
 import { DarkMode, SEO, Sidebar, Header } from "../components";
+import { safeSetLocalStorage, safeGetLocalStorage } from "../utils/localstorage";
 
 const projList = ProjList.proj;
 
@@ -11,40 +12,31 @@ const Projects = ({ data }) => {
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = (mode) => {
     setDarkMode(mode === "dark" ? true : false);
-    localStorage.setItem("dark-mode", mode === "dark" ? true : false);
+    safeSetLocalStorage("dark-mode", mode === "dark" ? true : false);
   };
   const [activeItem, setActiveItem] = useState(-1);
   useEffect(() => {
     let mode =
-      (localStorage.getItem("dark-mode")
-        ? localStorage.getItem("dark-mode")
-        : false) === "true"
-        ? true
-        : false;
+    safeGetLocalStorage("dark-mode") !== true;
     setDarkMode(mode);
     const [, query] = window.location.href.split("?");
     const [, id] = query ? query.split("=") : [-1, -1];
     setActiveItem(id);
   }, []);
   return (
-    <Layout darkMode={darkMode}>
-      <SEO title="Projects" keywords={[`gatsby`, `application`, `react`]} />
-      <Header active={"project"} darkMode={darkMode} />
-      <Sidebar active={"project"} darkMode={darkMode} />
-      <div className="container2">
+    
+      <div className="container2" id="projects">
         {projList.map((item, i) => (
           <ProjectList
             darkMode={darkMode}
             active={i == activeItem}
             key={i}
             index={i}
-            fluid={data[item.name].childImageSharp.fluid}
+            fluid={data? data[item.name].childImageSharp.fluid: ''}
             data={item}
           />
         ))}
       </div>
-      <DarkMode toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
-    </Layout>
   );
 };
 

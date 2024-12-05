@@ -2,6 +2,29 @@
 @import "https://use.fontawesome.com/releases/v5.4.2/css/all.css";
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Apply the bounce animation to the button */
+@keyframes bounce {
+  0% {
+    transform: translateY(0); /* Start at original position */
+  }
+  50% {
+    transform: translateY(-10px); /* Move up */
+  }
+  100% {
+    transform: translateY(0); /* Return to original position */
+  }
+}
+
+.next-button {
+  animation: bounce 1s infinite; /* Apply the bounce animation */
+}
+
+
 body,html{
   font : 11pt 'Montserrat', sans-serif;
   margin:0 auto;

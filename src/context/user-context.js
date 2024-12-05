@@ -1,5 +1,6 @@
 import React, { createContext } from 'react';
 import api from '../api';
+import { safeSetLocalStorage, safeGetLocalStorage } from '../utils/localstorage';
 
 export const UserContext = createContext({
   user: undefined,
@@ -8,7 +9,7 @@ export const UserContext = createContext({
 
 export class UserProvider extends React.Component {
     setUser = (user) => {
-    localStorage.setItem("user", JSON.stringify(user)); 
+      safeSetLocalStorage("user", JSON.stringify(user)); 
     api.signin(user).catch((e)=>console.log('Error Connecting to the server!'));
     this.setState({ user  });
   };
@@ -20,7 +21,7 @@ export class UserProvider extends React.Component {
 
   componentWillMount(){
     try{
-        let user = localStorage.getItem('user') !== undefined && localStorage.getItem('user') !== null? JSON.parse(localStorage.getItem('user')): undefined;
+        let user = safeGetLocalStorage('user') || undefined;
         if(user !== undefined){
             this.setState({ user });
             api.signin(user).catch((e)=>console.log('Error Connecting to the server!'));

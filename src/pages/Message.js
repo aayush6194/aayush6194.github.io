@@ -5,6 +5,7 @@ import posed from "react-pose";
 import { Loader, Sidebar, DarkMode, SEO, Header } from "../components/";
 import api from "../api";
 import { ModalConsumer } from "../context/modal-context";
+import { safeSetLocalStorage, safeGetLocalStorage } from "../utils/localstorage";
 
 const Box = styled(
   posed.div({
@@ -52,8 +53,8 @@ class Message extends React.Component {
 
   getDarkMode() {
     let mode =
-      (localStorage.getItem("dark-mode")
-        ? localStorage.getItem("dark-mode")
+      (safeGetLocalStorage("dark-mode")
+        ? safeGetLocalStorage("dark-mode")
         : false) === "true"
         ? true
         : false;
@@ -66,7 +67,7 @@ class Message extends React.Component {
   }
 
   toggleDarkMode = (mode) => {
-    localStorage.setItem("dark-mode", mode === "dark" ? true : false);
+    safeSetLocalStorage("dark-mode", mode === "dark" ? true : false);
     this.setState({ darkMode: mode === "dark" ? true : false });
   };
 

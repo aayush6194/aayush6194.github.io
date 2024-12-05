@@ -38,9 +38,10 @@ let Navbar = ({ darkMode, active }) => {
         </span>))}
       </Animation>
       <Box>
-        <Name><span className="blue">&lt;Aayush	/&gt;</span></Name>
+        <Name><span className="white" style={{fontSize: '2em'}}>&lt;Aayush	/&gt;</span></Name>
         <Link to="/Message"
           style={{
+            position: 'fixed', zIndex: 1000,
             filter: active === "message" ? "drop-shadow(2px 3px 10px gray)" : '',
             color: active === "message" ? "#30ABE8" : '',
             background: active === "message" ? "white" : '',

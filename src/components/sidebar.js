@@ -18,7 +18,9 @@ const Nav = styled.div`
   display: grid;
   padding: 0.3em;
   position: fixed;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  font-size: 1em;
+  grid-gap: 4em 1em;
+  grid-template-rows: auto auto auto auto auto 1fr;
 
   background: ${(props) => props.background};
   z-index: 10;
@@ -27,6 +29,7 @@ const Nav = styled.div`
     width: 100vw;
     top: inherit;
     bottom: 0;
+    grid-gap: 1em;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
   }
@@ -55,11 +58,11 @@ const Sidebar = ({ active, darkMode }) => {
   return (
     <div style={{ position: "absolute" }}>
       <Modal modal={modal} close={closeModal} text={text} />
-      <Nav background={darkMode ? "black" : primaryColor}>
+      <Nav background={darkMode ? "rgb(17 24 39/1)" : primaryColor}>
         <NavLink className="nav-item txt-md center-items" to="/" 
         style={{  
           
-          borderLeft: "3px solid " + (active === "home"? "white": primaryColor)}}
+          borderLeft: "3px solid " + (active === "home"? "white": 'transparent')}}
         >
           <i
             className={`material-icons lg-icon ${
@@ -70,8 +73,8 @@ const Sidebar = ({ active, darkMode }) => {
           </i>
           <div>Home</div>
         </NavLink>
-        <NavLink className="nav-item txt-md center-items" to="/Projects"
-        style={{  borderLeft: "3px solid " + (active === "project"? "white": primaryColor)}}
+        <NavLink className="nav-item txt-md center-items" to="/#projects"
+         style={{  borderLeft: "3px solid " + (active === "project"? "white": 'transparent')}}
         >
           {" "}
           <i
@@ -82,6 +85,19 @@ const Sidebar = ({ active, darkMode }) => {
             work
           </i>
           <div>Projects</div>
+        </NavLink>
+        <NavLink className="nav-item txt-md center-items" to="/articles"
+        style={{  borderLeft: "3px solid " + (active === "articles"? "white": 'transparent')}}
+        >
+          {" "}
+          <i
+            className={`material-icons lg-icon ${
+              active === "articles" ? "active-nav" : ""
+            }`}
+          >
+            work
+          </i>
+          <div>Articles</div>
         </NavLink>
         <a
           className="nav-item txt-md center-items"

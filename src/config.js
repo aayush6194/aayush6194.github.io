@@ -9,4 +9,4 @@ export const primaryDarkColor = '#8b64b7';
 export const secondaryDarkColor = 'black';
 export const txtColorDark = 'white';
 export const cardColorDark = '#182A2F';
-;
+export const IS_BROWSER = typeof window !== "undefined"

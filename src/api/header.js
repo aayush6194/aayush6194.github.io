@@ -1,9 +1,11 @@
+import { safeGetLocalStorage } from "../utils/localstorage";
+
 function header() {
   return { "Content-Type": "application/json" };
 }
 
 function authHeader() {
-  let authtoken = localStorage.getItem("token")? localStorage.getItem("token"): null;
+  let authtoken = safeGetLocalStorage('token');
   return { "Content-Type": "application/json", token: authtoken };
 }
 

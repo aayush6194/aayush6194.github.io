@@ -9,6 +9,7 @@ import svgDark from "./../images/step2-dark.svg";
 import { ModalConsumer, ModalContext } from "../context/modal-context";
 import Hints from "./hints";
 
+
 const Box = styled(posed.div({}))`
   font-size: 1.18em;
   font-family: "Montserrat", sans-serif;
@@ -52,10 +53,11 @@ class Home extends React.Component {
       <>
         <Sidebar active={"home"} darkMode={darkMode} />
         <div className="home grid align-center" style={{
-              perspective: "100rem",
-              maxWidth: '93%',
-              margin: 'auto',
-              position: "relative"}}>
+          perspective: "100rem",
+          maxWidth: '93%',
+          margin: 'auto',
+          position: "relative"
+        }}>
           <div
             style={{
               display: "grid",
@@ -70,36 +72,32 @@ class Home extends React.Component {
             />
           </div>
           <div className="content-container align-left"
-          style={{position: "relative",
-          transformOrigin: 'left',
-          transform: 'rotateY(-35deg)'}}
-    
+            style={{
+              position: "relative",
+              transformOrigin: 'left',
+              transform: 'rotateY(-25deg)'
+            }}
+
           >
             <Fade left>
               <Box>
                 <h1 style={{ margin: 0, marginBottom: "9px" }}>
                   Hello, I am Aayush!
                 </h1>
-                I am a Senior at the ULM pursuing a <b>Computer Science </b>{" "}
-                degree, and I am also a <b>FullStack Web Developer</b> at LSBDC.
-                I love learning and I build web apps.
+                I’m a Software Engineer at <b>PayPal</b>, focusing on building enterprise applications. Previously, I worked at <b>ParkStash</b>, solving real-world challenges through technology. I’m passionate about creating scalable solutions, learning new technologies, and driving impactful innovation.
                 <br />
-                <br /> Check out some of my projects, my resume or send me an
-                email.
+                <br /> Feel free to reach out via email!
                 <div>
-                  <Link to="/Projects" style={{ float: "right" }}>
-                    <span className="bold-white">Check My Projects!</span>
-                    <i className="material-icons shine">details</i>
-                  </Link>
                 </div>
                 <Text></Text>
               </Box>
+
             </Fade>
           </div>
-         
+
         </div>
         <Hints msg={["Hello"]} />
-          <DarkMode toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+        <DarkMode toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
       </>
     );
   }
