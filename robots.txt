@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
-Sitemap: http://www.aayushh.com/sitemap.xml
-Host: www.aayushh.com
+Disallow: /404
+Disallow: /404.html
+Disallow: /dev-404-page
+Disallow: /offline-plugin-app-shell-fallback
+Crawl-delay: 10
+Sitemap: https://www.aayushh.com/sitemap/sitemap-index.xml
+Host: https://www.aayushh.com
