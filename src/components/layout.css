@@ -7,6 +7,13 @@ body.no-scroll {
   height: 100vh;
 }
 
+@media (max-width: 600px) {
+  .articles-container {
+    grid-template-columns: 1fr !important; /* Collapse to 1 column */
+  }
+}
+
+
 /* Apply the bounce animation to the button */
 @keyframes bounce {
   0% {

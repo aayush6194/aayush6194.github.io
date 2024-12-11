@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Fade from "react-reveal/Fade";
 import { Sidebar, DarkMode } from "../components";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
@@ -34,6 +33,9 @@ const ArticleCard = styled.div`
     overflow-x: auto;
     margin: 1em 0;
     border: 1px solid ${(props) => (props.darkMode ? "#333" : "#e1e1e1")};
+     
+      max-width: 100%; /* Prevent it from exceeding the container width */
+      white-space: pre-wrap; /* Allow wrapping for long lines */
   }
 
   // Inline code styling (backticks)
@@ -224,6 +226,7 @@ const Articles = ({ data, darkMode, toggleDarkMode, pageContext }) => {
       >
         <h1>Article</h1>
         <div
+         className="articles-container"
           style={{
             display: "grid",
             gridTemplateColumns:
@@ -244,7 +247,7 @@ const Articles = ({ data, darkMode, toggleDarkMode, pageContext }) => {
             );
 
             return (
-              <Fade left>
+             
                 <Box>
                   <Article
                     node={node}
@@ -253,7 +256,7 @@ const Articles = ({ data, darkMode, toggleDarkMode, pageContext }) => {
                     markdownContent={markdownContent}
                   />
                 </Box>
-              </Fade>
+             
             );
           })}
         </div>
@@ -266,10 +269,6 @@ const Articles = ({ data, darkMode, toggleDarkMode, pageContext }) => {
 const Article = ({ node, frontMatter, markdownContent, collapsed }) => {
   const darkMode = true;
   const [isExpanded, setIsExpanded] = useState(!collapsed);
-
-  const toggleArticle = () => {
-    setIsExpanded(!isExpanded);
-  };
 
   return (
     <>
